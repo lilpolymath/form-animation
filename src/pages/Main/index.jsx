@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTransition, animated, config } from 'react-spring';
 
 import One from '../../components/FormOne';
@@ -7,51 +7,32 @@ import Three from '../../components/FormThree';
 import Four from '../../components/FormFour';
 import ProgressRing from '../../components/ProgressRing';
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
 const Main = () => {
   const [progress, setProgress] = useState(0);
   const [activeForm, setActiveForm] = useState(0);
 
   const forms = [
-    ({ style }) => (
-      <animated.div style={{ ...style }}>
-        <One next={setActiveForm} />
-      </animated.div>
-    ),
-    ({ style }) => (
-      <animated.div style={{ ...style }}>
-        <Two next={setActiveForm} />
-      </animated.div>
-    ),
-    ({ style }) => (
-      <animated.div style={{ ...style }}>
-        <Three next={setActiveForm} />
-      </animated.div>
-    ),
-    ({ style }) => (
-      <animated.div style={{ ...style }}>
-        <Four next={setActiveForm} />
-      </animated.div>
-    ),
+    {
+      key: 0,
+      render: ({ style }) => <One style={{ ...style }} next={setActiveForm} />,
+    },
+    {
+      key: 1,
+      render: ({ style }) => <Two style={{ ...style }} next={setActiveForm} />,
+    },
+    {
+      key: 2,
+      render: ({ style }) => (
+        <Three style={{ ...style }} next={setActiveForm} />
+      ),
+    },
+    {
+      key: 3,
+      render: ({ style }) => <Four style={{ ...style }} next={setActiveForm} />,
+    },
   ];
 
-  const animatedForms = useTransition(forms[activeForm], p => p, {
+  const animatedForms = useTransition(activeForm, p => p, {
     from: {
       opacity: 0,
       position: 'absolute',
@@ -64,22 +45,26 @@ const Main = () => {
       opacity: 0,
       position: 'absolute',
     },
-    // config: { ...config.gentle, duration: 2000 },
+    // config: { ...config.gentle, duration: 250 },
   });
 
-  useInterval(() => {
-    progress !== 100 && setProgress(progress + 25);
-  }, 1000);
+  useEffect(() => {
+    setProgress(activeForm * 25);
+  }, [activeForm]);
 
   return (
     <main>
       <div className='rings'>
-        <ProgressRing radius='120' stroke='20' progress={progress} />
+        <ProgressRing radius='160' stroke='20' progress={progress} />
       </div>
       <div className='forms'>
         {animatedForms.map(({ item, props, key }) => {
-          const Item = item;
-          return <Item style={props} />;
+          const Item = forms[item].render;
+          return (
+            <animated.div key={key} style={{ ...props }}>
+              <Item />
+            </animated.div>
+          );
         })}
       </div>
     </main>

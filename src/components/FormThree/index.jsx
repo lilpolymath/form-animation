@@ -1,8 +1,9 @@
 import React from 'react';
+import { animated } from 'react-spring';
 
-const Three = ({next}) => {
+const Three = ({ next, style }) => {
   return (
-    <section>
+    <animated.section style={{ ...style }}>
       <form action='post'>
         <h1>What is your birthdate?</h1>
         <input type='date' name='birthday' id='bday' />
@@ -13,7 +14,7 @@ const Three = ({next}) => {
           Go Back
         </button>
       </form>
-    </section>
+    </animated.section>
   );
 };
 

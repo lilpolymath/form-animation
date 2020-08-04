@@ -1,8 +1,9 @@
 import React from 'react';
+import { animated } from 'react-spring';
 
-const Two = ({ next }) => {
+const Two = ({ next, style }) => {
   return (
-    <section>
+    <animated.section style={{ ...style }}>
       <form action='post'>
         <h1>What is your Gender?</h1>
         <input type='radio' name='gender' value='male' />
@@ -14,7 +15,7 @@ const Two = ({ next }) => {
           Go Back
         </button>
       </form>
-    </section>
+    </animated.section>
   );
 };
 

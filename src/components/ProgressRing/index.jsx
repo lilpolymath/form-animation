@@ -16,7 +16,18 @@ const ProgressRing = ({ radius, stroke, progress }) => {
         r={normalizedRadius}
         cx={radius}
         cy={radius}
-      />
+      />{' '}
+      <text
+        x='50%'
+        y='50%'
+        textAnchor='middle'
+        stroke='blue'
+        fill='blue'
+        strokeWidth='1px'
+        dy='.5em'
+      >
+        {progress}%
+      </text>
     </svg>
   );
 };

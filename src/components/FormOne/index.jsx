@@ -1,8 +1,9 @@
 import React from 'react';
+import { animated } from 'react-spring';
 
-const One = ({ next }) => {
+const One = ({ next, style }) => {
   return (
-    <section>
+    <animated.section style={{ ...style }}>
       <form action='post'>
         <h1>What is your Zip Code?</h1>
         <input
@@ -19,7 +20,7 @@ const One = ({ next }) => {
           Go Back
         </button>
       </form>
-    </section>
+    </animated.section>
   );
 };
 

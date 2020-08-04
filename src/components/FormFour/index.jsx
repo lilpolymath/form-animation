@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { animated } from 'react-spring';
 
-const Four = ({ next }) => {
+const Four = ({ next, style }) => {
   const [active, setActive] = useState(false);
 
   return (
-    <section>
+    <animated.section style={{ ...style }}>
       <form action='post'>
         <h1>How many members in your household?</h1>
         <div className='options radio'>
@@ -33,14 +34,18 @@ const Four = ({ next }) => {
           />
           <label htmlFor='more'>3+</label>
         </div>
-        <button className={active ? 'submit' : 'button_inactive'} type='submit'>
+        <button
+          onClick={() => next(3)}
+          className={active ? 'submit' : 'button_inactive'}
+          type='submit'
+        >
           View my Options
         </button>
         <button onClick={() => next(2)} className='back' type='submit'>
           Go Back
         </button>
       </form>
-    </section>
+    </animated.section>
   );
 };
 

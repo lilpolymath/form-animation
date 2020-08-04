@@ -143,6 +143,10 @@ main {
   flex-direction: column;
 }
 
+.gender label{
+  padding: 3rem;
+}
+
 @media only screen and (max-width: 500px) {
   main {
     flex-direction: column;

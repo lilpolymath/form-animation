@@ -45,7 +45,7 @@ const Main = () => {
       opacity: 0,
       position: 'absolute',
     },
-    // config: { ...config.gentle, duration: 250 },
+    config: config.gentle,
   });
 
   useEffect(() => {

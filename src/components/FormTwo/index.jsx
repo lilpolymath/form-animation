@@ -51,6 +51,7 @@ const Two = ({ next, style }) => {
           </label>
         </div>
         <button
+          disabled={!active}
           onClick={() => next(2)}
           className={active ? 'submit' : 'button_inactive'}
           type='submit'

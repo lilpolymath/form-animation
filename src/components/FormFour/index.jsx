@@ -36,6 +36,7 @@ const Four = ({ next }) => {
         </div>
         <button
           onClick={() => next(4)}
+          disabled={!active}
           className={active ? 'submit' : 'button_inactive'}
           type='submit'
         >

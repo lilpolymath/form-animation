@@ -20,11 +20,16 @@ circle {
   transform-origin: 50% 50%;
 }
 
-form {
+form,
+.success {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+}
+
+.success > h1 {
+  margin-top: -5rem;
 }
 
 h1 {
@@ -143,7 +148,7 @@ main {
   flex-direction: column;
 }
 
-.gender label{
+.gender label {
   padding: 3rem;
 }
 
@@ -160,4 +165,26 @@ section {
 
 text {
   font-size: 1.5rem;
+}
+
+.path {
+  animation: dash 2500ms 0ms forwards;
+  animation-timing-function: cubic-bezier(0.45, 0.25, 0.6, 0.95);
+}
+
+.check {
+  margin-top: -12rem;
+  transform: scale(0);
+}
+
+@keyframes dash {
+  0% {
+    transform: scale(0.25);
+  }
+  50% {
+    transform: scale(0.3);
+  }
+  100% {
+    transform: scale(0.25);
+  }
 }

@@ -6,6 +6,7 @@ import Two from '../../components/FormTwo';
 import Three from '../../components/FormThree';
 import Four from '../../components/FormFour';
 import ProgressRing from '../../components/ProgressRing';
+import Final from '../../components/Final';
 
 const Main = () => {
   const [progress, setProgress] = useState(0);
@@ -14,21 +15,23 @@ const Main = () => {
   const forms = [
     {
       key: 0,
-      render: ({ style }) => <One style={{ ...style }} next={setActiveForm} />,
+      render: () => <One next={setActiveForm} />,
     },
     {
       key: 1,
-      render: ({ style }) => <Two style={{ ...style }} next={setActiveForm} />,
+      render: () => <Two next={setActiveForm} />,
     },
     {
       key: 2,
-      render: ({ style }) => (
-        <Three style={{ ...style }} next={setActiveForm} />
-      ),
+      render: () => <Three next={setActiveForm} />,
     },
     {
       key: 3,
-      render: ({ style }) => <Four style={{ ...style }} next={setActiveForm} />,
+      render: () => <Four next={setActiveForm} />,
+    },
+    {
+      key: 4,
+      render: () => <Final next={setActiveForm} />,
     },
   ];
 
@@ -45,7 +48,7 @@ const Main = () => {
       opacity: 0,
       position: 'absolute',
     },
-    config: config.gentle,
+    config: config.stiff,
   });
 
   useEffect(() => {
@@ -60,12 +63,14 @@ const Main = () => {
       <div className='forms'>
         {animatedForms.map(({ item, props, key }) => {
           const Item = forms[item].render;
+          console.log(item);
           return (
             <animated.div key={key} style={{ ...props }}>
               <Item />
             </animated.div>
           );
         })}
+        {/* <Final /> */}
       </div>
     </main>
   );
